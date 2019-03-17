@@ -1,0 +1,24 @@
+.left{
+    float: left;
+}
+
+.right{
+    float: right;
+}
+
+#topbar{
+    background-color: #f2ebeb;
+}
+
+.container{
+    width: 1000px;
+}
+
+/*.nav li a:hover{*/
+    /*background-color:#fb9600;*/
+/*}*/
+
+.nav li a{
+    color: #353536;
+    font-size: 15px;
+}
