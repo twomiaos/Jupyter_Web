@@ -12,12 +12,17 @@
 %>
 <html>
 <head>
-    <%--<base href="<%=basePath%>">--%>
+    <base href="<%=basePath%>">
     <script src="js/jquery/2.0.0/jquery.min.js"></script>
     <link href="css/bootstrap/3.3.6/bootstrap.css" rel="stylesheet"/>
     <link href="css/navigator.css" rel="stylesheet">
     <link href="css/experimentPage.css" rel="stylesheet">
     <script src="js/bootstrap/3.3.6/bootstrap.js"></script>
+
+    <link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"/>
+    <link rel="stylesheet" href="css/screen.css" type="text/css"/>
+    <script src="js/jquery.treeview.js" type="text/javascript"></script>
+
 
     <title>实训中心</title>
 </head>
@@ -25,74 +30,111 @@
 
 <jsp:include page="navigator.jsp"/>
 
-<div class="container">
+<div class="container" id="pageContain">
     <div class="row">
-        <%--左侧Jupyter编辑区--%>
-        <div class="col-xs-9 ">
-            <iframe src="http://localhost:8888/notebooks/Untitled.ipynb?token=5b392634a78cd41f1e7cbf96f1c392a48aedaf6e2f1b5c05"
-                    id="my-iframe">
+        <%--左侧文件管理区--%>
+        <div class="col-lg-2 area">
+            <div class="input-group" id="searchDiv">
+                <input type="text" class="form-control" placeholder="搜索所有文件" aria-describedby="basic-addon2">
+            </div>
+
+            <div class="titleDiv">
+                文件管理
+            </div>
+
+            <div id="fileTreeDiv">
+                <ul id="treeview" class="filetree">
+                    <li><span class="file">密码修改</span></li>
+                    <li><span class="file">系统管理</span></li>
+                    <li><span class="folder">行政部门</span>
+                        <ul>
+                            <li><span class="file">合同管理</span></li>
+                            <li><span class="file">加班信息</span></li>
+                            <li><span class="file">业绩报告</span></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <%--中间Jupyter编辑区--%>
+        <div class="col-xs-8 area">
+            <iframe src=" " id="my-iframe">
             </iframe>
         </div>
 
-        <%--右侧工具栏--%>
-        <div class="col-xs-3" id="right-tool">
-            <%--搜索区和新建按钮--%>
-            <div class="row">
-                <div class="col-lg-8">
-                    <div id="searchDiv">
-                        <form action="#" method="post">
-                            <div class="input-group">
-                                <input name="keyword" class="form-control" value="${param.keyword}"
-                                       placeholder="搜索所有文件" required="" style="width: 100%"/>
-                                <span class="input-group-btn ">
-                    <button class="btn btn-default" type="submit" style="padding: 9px;margin-bottom: 15px;"
-                            title="支持模糊搜索">
-                        <span class="glyphicon glyphicon-search"></span>
-                    </button>
-                </span>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div>
-                        <button type="button" class="btn btn-warning">新建</button>
-                    </div>
-                </div>
-            </div>
+        <%--右侧实验指导+工具栏区--%>
+        <div class="col-xs-2 area">
 
+            <div id="toolDiv">
+                <label>工具栏</label>
+                <button type="button" class="btn btn-default dropdown-toggle"
+                        data-toggle="dropdown">
+                    <span class="caret"></span>
 
-            <%--实验指导和文件管理区域--%>
-            <div>
-                <ul id="myTab" class="nav nav-tabs">
-                    <li class="active">
-                        <a href="#expGuide" data-toggle="tab">实验指导</a>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li>
+                        <a href="#">60:00</a>
                     </li>
                     <li>
-                        <a href="#fileManage" data-toggle="tab">文件管理</a>
+                        <a href="#">延时</a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#">保存实验</a>
+                    </li>
+
+                    <li role="presentation">
+                        <a href="#">重置实验</a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#">导出实验</a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#">提交实验</a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#">退出实验</a>
                     </li>
                 </ul>
-                <div id="myTabContent" class="tab-content">
-                    <div class="tab-pane fade in active" id="expGuide">
-                        <p>实验步骤1</p>
-                        <p>实验步骤2</p>
-                        <p>实验步骤3</p>
-                        <p>实验步骤4</p>
-                    </div>
-                    <div class="tab-pane fade" id="fileManage">
-                        <p>文件树内容</p>
-                        <p>文件树内容</p>
-                        <p>文件树内容</p>
-                        <p>文件树内容</p>
-                    </div>
-                </div>
             </div>
 
-            <%--视频区域--%>
+            <div class="titleDiv" style="margin-top: 60px;">
+                实验指导
+            </div>
 
+            <div id="expGuideDiv">
+                <div class="list-group">
+                    <button type="button" class="list-group-item active">实验步骤1</button>
+                    <button type="button" class="list-group-item">实验步骤2</button>
+                    <button type="button" class="list-group-item">实验步骤3</button>
+                    <button type="button" class="list-group-item">实验步骤4</button>
+                    <button type="button" class="list-group-item">实验步骤5</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
+<script>
+    $(function () {
+        $(".file").click(function () {
+            var src = $(this).attr("href");
+            alert(src);
+
+            $("#my-iframe").attr("src", src);
+            return false;
+        })
+    })
+
+    $(document).ready(function(){
+        $("#treeview").treeview({
+            toggle: function() {
+                console.log("%s was toggled.", $(this).find(">span").text());
+            }
+        });
+    });
+</script>
 
 </body>
 </html>

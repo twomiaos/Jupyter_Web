@@ -7,7 +7,7 @@
 }
 
 #topbar{
-    background-color: #f2ebeb;
+    background-color: #4b71d3;
 }
 
 .container{
@@ -19,6 +19,6 @@
 /*}*/
 
 .nav li a{
-    color: #353536;
+    color: #ffffff;
     font-size: 15px;
 }

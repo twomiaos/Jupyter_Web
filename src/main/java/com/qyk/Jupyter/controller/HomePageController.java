@@ -1,5 +1,7 @@
 package com.qyk.Jupyter.controller;
 
+import com.qyk.Jupyter.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -8,6 +10,9 @@ import java.util.Map;
 
 @Controller
 public class HomePageController {
+    @Autowired
+    private UserService userService;
+
     @RequestMapping("/login")
     public String toLoginPage(){
         return "loginPage";
@@ -15,10 +20,14 @@ public class HomePageController {
 
     @RequestMapping("/loginCheck")
     public String login(HttpSession session, String name, String password, Map<String, Object> map){
-        // 测试用！待完善
-        if(name.equals(password)){
-            session.setAttribute("username", name);
-            return "coursePage";
+        if(userService.loginCheck(name, password)){
+            if(userService.runJupyter(name, map)){
+                session.setAttribute("token", map.get("token"));
+                session.setAttribute("port", map.get("port"));
+                session.setAttribute("username", name);
+                return "experimentPage";
+            }
+            return "error";
         } else {
             map.put("error", "用户名密码不匹配或账户已被停用！请联系管理员！");
             return "loginPage";

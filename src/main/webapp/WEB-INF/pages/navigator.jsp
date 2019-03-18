@@ -12,11 +12,11 @@
 <div id = topbar>
     <div class="container">
         <ol class="nav nav-pills left">
-            <li><a style="color: #e21d1d" href="#">大数据综合实训平台</a></li>
-            <li><a href="#">实训中心</a></li>
-            <li><a href="#">帮助中心</a></li>
+            <li><a href="#">大数据综合实训平台</a></li>
         </ol>
         <ol class="nav nav-pills right">
+            <li><a href="#">实训中心</a></li>
+            <li><a href="#">帮助中心</a></li>
             <li><a href="#">拓展学习</a></li>
             <li><a href="#">答疑平台</a></li>
             <c:if test="${!empty sessionScope.username}">
