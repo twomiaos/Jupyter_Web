@@ -28,26 +28,41 @@
 <div class="container">
     <div class="row">
         <%--左侧Jupyter编辑区--%>
-        <div class="col-xs-8 ">
-
+        <div class="col-xs-9 ">
+            <iframe src="http://localhost:8888/notebooks/Untitled.ipynb?token=5b392634a78cd41f1e7cbf96f1c392a48aedaf6e2f1b5c05"
+                    id="my-iframe">
+            </iframe>
         </div>
 
         <%--右侧工具栏--%>
-        <div class="col-xs-4" id="right-tool">
-            <div id="searchDiv">
-                <form action="#" method="post">
-                    <div class="input-group" style="margin-right: 10px;width: 200px">
-                        <input name="keyword" class="form-control" value="${param.keyword}"
-                               placeholder="搜索所有文件" required="" style="width: 260px"/>
-                        <span class="input-group-btn ">
-                    <button class="btn btn-default" type="submit" style="padding: 9px;margin-bottom: 15px;"  title="支持模糊搜索" >
+        <div class="col-xs-3" id="right-tool">
+            <%--搜索区和新建按钮--%>
+            <div class="row">
+                <div class="col-lg-8">
+                    <div id="searchDiv">
+                        <form action="#" method="post">
+                            <div class="input-group">
+                                <input name="keyword" class="form-control" value="${param.keyword}"
+                                       placeholder="搜索所有文件" required="" style="width: 100%"/>
+                                <span class="input-group-btn ">
+                    <button class="btn btn-default" type="submit" style="padding: 9px;margin-bottom: 15px;"
+                            title="支持模糊搜索">
                         <span class="glyphicon glyphicon-search"></span>
                     </button>
                 </span>
+                            </div>
+                        </form>
                     </div>
-                </form>
+                </div>
+                <div class="col-lg-4">
+                    <div>
+                        <button type="button" class="btn btn-warning">新建</button>
+                    </div>
+                </div>
             </div>
 
+
+            <%--实验指导和文件管理区域--%>
             <div>
                 <ul id="myTab" class="nav nav-tabs">
                     <li class="active">
@@ -72,6 +87,8 @@
                     </div>
                 </div>
             </div>
+
+            <%--视频区域--%>
 
         </div>
     </div>
