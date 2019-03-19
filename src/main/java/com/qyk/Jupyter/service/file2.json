@@ -1,0 +1,73 @@
+{
+  "mimetype": null,
+  "writable": true,
+  "name": "admin",
+  "format": "json",
+  "created": "2019-03-18T13:57:17.291238Z",
+  "content": [
+    {
+      "mimetype": null,
+      "writable": true,
+      "name": "Folder1",
+      "format": null,
+      "created": "2019-03-18T14:18:58.960129Z",
+      "content": null,
+      "last_modified": "2019-03-18T14:18:58.992146Z",
+      "path": "admin/Folder1",
+      "type": "directory",
+      "size": null
+    },
+    {
+      "mimetype": null,
+      "writable": true,
+      "name": "Folder2",
+      "format": null,
+      "created": "2019-03-18T14:18:59.010105Z",
+      "content": null,
+      "last_modified": "2019-03-18T04:29:02.738866Z",
+      "path": "admin/Folder2",
+      "type": "directory",
+      "size": null
+    },
+    {
+      "mimetype": null,
+      "writable": true,
+      "name": "test-notebook1.ipynb",
+      "format": null,
+      "created": "2019-03-18T14:18:59.013364Z",
+      "content": null,
+      "last_modified": "2019-03-18T08:57:06.920439Z",
+      "path": "admin/test-notebook1.ipynb",
+      "type": "notebook",
+      "size": 1988
+    },
+    {
+      "mimetype": null,
+      "writable": true,
+      "name": "test-notebook2.ipynb",
+      "format": null,
+      "created": "2019-03-18T14:18:59.305471Z",
+      "content": null,
+      "last_modified": "2019-03-18T07:32:45.390357Z",
+      "path": "admin/test-notebook2.ipynb",
+      "type": "notebook",
+      "size": 556
+    },
+    {
+      "mimetype": null,
+      "writable": true,
+      "name": "Untitled.ipynb",
+      "format": null,
+      "created": "2019-03-18T14:18:58.957134Z",
+      "content": null,
+      "last_modified": "2019-03-19T08:24:18.870700Z",
+      "path": "admin/Untitled.ipynb",
+      "type": "notebook",
+      "size": 556
+    }
+  ],
+  "last_modified": "2019-03-19T08:24:18.885673Z",
+  "path": "admin",
+  "type": "directory",
+  "size": null
+}

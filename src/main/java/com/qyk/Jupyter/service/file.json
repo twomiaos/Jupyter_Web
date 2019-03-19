@@ -1,0 +1,85 @@
+{
+  "mimetype": null,
+  "writable": true,
+  "name": "",
+  "format": "json",
+  "created": "2019-03-17T03:47:17.957467Z",
+  "content": [
+    {
+      "mimetype": null,
+      "writable": true,
+      "name": "admin",
+      "format": null,
+      "created": "2019-03-18T13:57:17.291238Z",
+      "content": null,
+      "last_modified": "2019-03-18T14:18:59.305471Z",
+      "path": "admin",
+      "type": "directory",
+      "size": null
+    },
+    {
+      "mimetype": null,
+      "writable": true,
+      "name": "test-notebook1.ipynb",
+      "format": null,
+      "created": "2019-03-19T02:46:29.394772Z",
+      "content": null,
+      "last_modified": "2019-03-18T08:57:06.920439Z",
+      "path": "test-notebook1.ipynb",
+      "type": "notebook",
+      "size": 1988
+    },
+    {
+      "mimetype": null,
+      "writable": true,
+      "name": "test-notebook2.ipynb",
+      "format": null,
+      "created": "2019-03-19T02:46:29.403755Z",
+      "content": null,
+      "last_modified": "2019-03-18T07:32:45.390357Z",
+      "path": "test-notebook2.ipynb",
+      "type": "notebook",
+      "size": 556
+    },
+    {
+      "mimetype": null,
+      "writable": true,
+      "name": "Untitled.ipynb",
+      "format": null,
+      "created": "2019-03-19T02:46:29.384292Z",
+      "content": null,
+      "last_modified": "2019-03-18T07:21:59.845689Z",
+      "path": "Untitled.ipynb",
+      "type": "notebook",
+      "size": 72
+    },
+    {
+      "mimetype": null,
+      "writable": true,
+      "name": "user1",
+      "format": null,
+      "created": "2019-03-18T13:57:01.533200Z",
+      "content": null,
+      "last_modified": "2019-03-18T14:18:31.769943Z",
+      "path": "user1",
+      "type": "directory",
+      "size": null
+    },
+    {
+      "mimetype": null,
+      "writable": true,
+      "name": "user2",
+      "format": null,
+      "created": "2019-03-18T13:57:12.336487Z",
+      "content": null,
+      "last_modified": "2019-03-18T14:18:35.474805Z",
+      "path": "user2",
+      "type": "directory",
+      "size": null
+    }
+  ],
+  "last_modified": "2019-03-19T02:46:29.403755Z",
+  "path": "",
+  "type": "directory",
+  "size": null
+}

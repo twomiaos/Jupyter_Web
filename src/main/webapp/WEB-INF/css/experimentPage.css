@@ -31,3 +31,7 @@
     z-index: 999;
     width: 100%;
 }
+
+#toolBtn{
+    border-color: #ffffff;
+}

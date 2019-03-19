@@ -19,10 +19,6 @@
     <link href="css/experimentPage.css" rel="stylesheet">
     <script src="js/bootstrap/3.3.6/bootstrap.js"></script>
 
-    <link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"/>
-    <link rel="stylesheet" href="css/screen.css" type="text/css"/>
-    <script src="js/jquery.treeview.js" type="text/javascript"></script>
-
 
     <title>实训中心</title>
 </head>
@@ -42,19 +38,13 @@
                 文件管理
             </div>
 
-            <div id="fileTreeDiv">
-                <ul id="treeview" class="filetree">
-                    <li><span class="file">密码修改</span></li>
-                    <li><span class="file">系统管理</span></li>
-                    <li><span class="folder">行政部门</span>
-                        <ul>
-                            <li><span class="file">合同管理</span></li>
-                            <li><span class="file">加班信息</span></li>
-                            <li><span class="file">业绩报告</span></li>
-                        </ul>
-                    </li>
-                </ul>
+            <div id="folderDiv">
+
             </div>
+            <div id="fileDiv">
+
+            </div>
+
         </div>
 
         <%--中间Jupyter编辑区--%>
@@ -69,7 +59,7 @@
             <div id="toolDiv">
                 <label>工具栏</label>
                 <button type="button" class="btn btn-default dropdown-toggle"
-                        data-toggle="dropdown">
+                        data-toggle="dropdown" id="toolBtn">
                     <span class="caret"></span>
 
                 </button>
@@ -117,22 +107,109 @@
 </div>
 
 <script>
-    $(function () {
-        $(".file").click(function () {
-            var src = $(this).attr("href");
-            alert(src);
+    // 点击文件链接，替换iframe标签的src
+    $('body').on('click', '.fileName', function () {
+        var src = $(this).attr("href");
 
-            $("#my-iframe").attr("src", src);
-            return false;
-        })
-    })
+        $("#my-iframe").attr("src", src);
+        return false;
+    });
 
-    $(document).ready(function(){
-        $("#treeview").treeview({
-            toggle: function() {
-                console.log("%s was toggled.", $(this).find(">span").text());
+    // 点击文件夹链接，发送Ajax请求
+    $('body').on('click', '.folderName', function () {
+        var basePath = "http://localhost:8888/";
+        var notebookDir = "notebooks/";
+        var username = "admin";
+        var fileApi = "api/contents/";
+        var type = "directory";
+        var token = "42f3396e95168791084f33b3d667c307da09fc868c1db3a4";
+        var page = $(this).attr('href');
+
+        $.get(
+            page,
+            {"type": type, "token": token},
+            function (result) {
+                var json = eval(result);
+                var files = json.content;
+
+                // 清空div中的内容
+                $("#fileDiv").empty();
+                $("#folderDiv").empty();
+
+                // 添加返回上一级按钮
+                var temp = basePath + fileApi + username;
+                var lastHtml =
+                    "<div class=\"folder\">" +
+                    "<span class=\"glyphicon glyphicon-folder-close\"></span>" +
+                    "<button type=\"button\" class='btn btn-link folderName' href=" + temp + ">返回上一级...</button>" +
+                    "</div>";
+                $("#folderDiv").append(lastHtml);
+
+                for (var i = 0; i < files.length; i++) {
+                    if (files[i].type == "directory") {
+                        var folderHref = basePath + fileApi + files[i].path;
+                        var html =
+                            "<div class=\"folder\">" +
+                            "<span class=\"glyphicon glyphicon-folder-close\"></span>" +
+                            "<button type=\"button\" class='btn btn-link folderName' href=" + folderHref + ">" + files[i].name + "</button>" +
+                            "</div>";
+                        $("#folderDiv").append(html);
+                    } else {
+                        var fileHref = basePath + notebookDir + files[i].path;
+                        var html =
+                            "<div class=\"file\">" +
+                            "<a class='fileName' href=" + fileHref + ">" + files[i].name + "</a>" +
+                            "</div>";
+                        $("#fileDiv").append(html);
+                    }
+
+                }
             }
-        });
+        );
+    });
+
+    // 文档加载后，发送Ajax请求文件列表
+    $(document).ready(function () {
+        var basePath = "http://localhost:8888/";
+        var notebookDir = "notebooks/";
+        var username = "admin";
+        var fileApi = "api/contents/";
+        var page = fileApi + username;
+        var type = "directory";
+        var token = "42f3396e95168791084f33b3d667c307da09fc868c1db3a4";
+
+        $.get(
+            basePath + fileApi + username,
+            {"type": type, "token": token},
+            function (result) {
+                var json = eval(result);
+                var files = json.content;
+
+                // 清空div中的内容
+                $("#fileDiv").empty();
+                $("#folderDiv").empty();
+
+                for (var i = 0; i < files.length; i++) {
+                    if (files[i].type == "directory") {
+                        var folderHref = basePath + fileApi + files[i].path;
+                        var html =
+                            "<div class=\"folder\">" +
+                                "<span class=\"glyphicon glyphicon-folder-close\"></span>" +
+                                "<button type=\"button\" class='btn btn-link folderName' href=" + folderHref + ">" + files[i].name + "</btn>" +
+                            "</div>";
+                        $("#folderDiv").append(html);
+                    } else {
+                        var fileHref = basePath + notebookDir + files[i].path;
+                        var html =
+                            "<div class=\"file\">" +
+                            "<a class='fileName' href=" + fileHref + ">" + files[i].name + "</a>" +
+                            "</div>";
+                        $("#fileDiv").append(html);
+                    }
+
+                }
+            }
+        );
     });
 </script>
 
