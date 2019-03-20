@@ -25,7 +25,7 @@ public class HomePageController {
                 session.setAttribute("token", map.get("token"));
                 session.setAttribute("port", map.get("port"));
                 session.setAttribute("username", name);
-                return "experimentPage";
+                return "loginTransitionPage";
             }
             return "error";
         } else {
@@ -35,7 +35,7 @@ public class HomePageController {
     }
 
     @RequestMapping("/experiment")
-    public String toExperimentPage(Map<String, Object> map, String id){
+    public String toExperimentPage(Map<String, Object> map){
         // 测试用！根据不同的实验id号返回对应的实验页面
         return "experimentPage";
     }
