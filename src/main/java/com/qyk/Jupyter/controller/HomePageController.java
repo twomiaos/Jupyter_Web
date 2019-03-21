@@ -25,6 +25,7 @@ public class HomePageController {
                 session.setAttribute("token", map.get("token"));
                 session.setAttribute("port", map.get("port"));
                 session.setAttribute("username", name);
+                session.setAttribute("basepath", map.get("basepath"));
                 return "loginTransitionPage";
             }
             return "error";

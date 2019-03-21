@@ -12,7 +12,7 @@
 %>
 <html>
 <head>
-    <base href="<%=basePath%>">
+    <%--<base href="<%=basePath%>">--%>
     <script src="js/jquery/2.0.0/jquery.min.js"></script>
     <link href="css/bootstrap/3.3.6/bootstrap.css" rel="stylesheet"/>
     <link href="css/navigator.css" rel="stylesheet">
@@ -106,6 +106,7 @@
     </div>
 </div>
 
+
 <script>
     // 点击文件链接，替换iframe标签的src
     $('body').on('click', '.fileName', function () {
@@ -117,12 +118,12 @@
 
     // 点击文件夹链接，发送Ajax请求
     $('body').on('click', '.folderName', function () {
-        var basePath = "http://localhost:8888/";
+        var basePath = "${sessionScope.basepath}";
         var notebookDir = "notebooks/";
-        var username = "admin";
+        var username = "${sessionScope.username}";
         var fileApi = "api/contents/";
         var type = "directory";
-        var token = "42f3396e95168791084f33b3d667c307da09fc868c1db3a4";
+        var token = "${sessionScope.token}";
         var page = $(this).attr('href');
 
         $.get(
@@ -137,7 +138,7 @@
                 $("#folderDiv").empty();
 
                 // 添加返回上一级按钮
-                var temp = basePath + fileApi + username;
+                var temp = basePath + fileApi;
                 var lastHtml =
                     "<div class=\"folder\">" +
                     "<span class=\"glyphicon glyphicon-folder-close\"></span>" +
@@ -170,16 +171,19 @@
 
     // 文档加载后，发送Ajax请求文件列表
     $(document).ready(function () {
-        var basePath = "http://localhost:8888/";
+        var basePath = "${sessionScope.basepath}";
         var notebookDir = "notebooks/";
-        var username = "admin";
+        var username = "${sessionScope.username}";
         var fileApi = "api/contents/";
         var page = fileApi + username;
         var type = "directory";
-        var token = "42f3396e95168791084f33b3d667c307da09fc868c1db3a4";
+        var token = "${sessionScope.token}";
+
+        alert(basePath + fileApi + username);
+        alert(token);
 
         $.get(
-            basePath + fileApi + username,
+            basePath + fileApi,
             {"type": type, "token": token},
             function (result) {
                 var json = eval(result);

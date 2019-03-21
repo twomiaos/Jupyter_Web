@@ -57,6 +57,8 @@
         setTimeout("step2()", 500);
         setTimeout("step3()", 500);
         setTimeout("step4()", 500);
+
+        window.location.href = "experiment";
     });
     
     function step1() {

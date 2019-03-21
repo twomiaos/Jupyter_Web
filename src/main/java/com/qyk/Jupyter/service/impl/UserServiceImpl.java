@@ -33,27 +33,28 @@ public class UserServiceImpl implements UserService {
 
         System.out.println(cmd);
 
-//        Runtime run = Runtime.getRuntime();
-//        try {
-//            Process process = run.exec(cmd);
-//            InputStream in = process.getInputStream();
-//            InputStreamReader reader = new InputStreamReader(in);
-//            BufferedReader br = new BufferedReader(reader);
-//            StringBuffer sb = new StringBuffer();
-//            String message;
-//            while((message = br.readLine()) != null) {
-//                sb.append(message);
-//            }
-//            System.out.println(sb);
-//        } catch (IOException e) {
-//            // TODO Auto-generated catch block
-//            e.printStackTrace();
-//            return false;
-//        }
+        Runtime run = Runtime.getRuntime();
+        try {
+            Process process = run.exec(cmd);
+            InputStream in = process.getInputStream();
+            InputStreamReader reader = new InputStreamReader(in);
+            BufferedReader br = new BufferedReader(reader);
+            StringBuffer sb = new StringBuffer();
+            String message;
+            while((message = br.readLine()) != null) {
+                sb.append(message);
+            }
+            System.out.println(sb);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return false;
+        }
 
-        map.put("url", host + port + "/");
+        //map.put("url", host + port + "/");
         map.put("dir", dir);
         map.put("token", token);
+        map.put("basepath", host+port+"/");
 
         return true;
     }
