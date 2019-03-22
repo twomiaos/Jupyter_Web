@@ -71,7 +71,7 @@
                         <a href="#">延时</a>
                     </li>
                     <li role="presentation">
-                        <a href="#">保存实验</a>
+                        <a href="#" id="save-notebook">保存实验</a>
                     </li>
 
                     <li role="presentation">
@@ -110,8 +110,8 @@
 <script>
     // 点击文件链接，替换iframe标签的src
     $('body').on('click', '.fileName', function () {
-        var src = $(this).attr("href");
-
+        var src = $(this).attr("href") + "?token=" + "${sessionScope.token}";
+        // alert(src);
         $("#my-iframe").attr("src", src);
         return false;
     });
@@ -142,7 +142,7 @@
                 var lastHtml =
                     "<div class=\"folder\">" +
                     "<span class=\"glyphicon glyphicon-folder-close\"></span>" +
-                    "<button type=\"button\" class='btn btn-link folderName' href=" + temp + ">返回上一级...</button>" +
+                    "<button type=\"button\" class='btn btn-link folderName' href=" + temp + ">" + "返回上一级..." + "</button>" +
                     "</div>";
                 $("#folderDiv").append(lastHtml);
 
@@ -178,9 +178,6 @@
         var page = fileApi + username;
         var type = "directory";
         var token = "${sessionScope.token}";
-
-        alert(basePath + fileApi + username);
-        alert(token);
 
         $.get(
             basePath + fileApi,

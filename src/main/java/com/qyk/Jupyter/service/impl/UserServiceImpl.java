@@ -34,22 +34,36 @@ public class UserServiceImpl implements UserService {
         System.out.println(cmd);
 
         Runtime run = Runtime.getRuntime();
-        try {
-            Process process = run.exec(cmd);
-            InputStream in = process.getInputStream();
-            InputStreamReader reader = new InputStreamReader(in);
-            BufferedReader br = new BufferedReader(reader);
-            StringBuffer sb = new StringBuffer();
-            String message;
-            while((message = br.readLine()) != null) {
-                sb.append(message);
-            }
-            System.out.println(sb);
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
+//        try {
+//            Process process = run.exec(cmd);
+//            InputStream in = process.getInputStream();
+//            InputStreamReader reader = new InputStreamReader(in);
+//            BufferedReader br = new BufferedReader(reader);
+//            StringBuffer sb = new StringBuffer();
+//            String message;
+//            while((message = br.readLine()) != null) {
+//                sb.append(message);
+//            }
+//            System.out.println(sb);
+//        } catch (IOException e) {
+//            // TODO Auto-generated catch block
+//            e.printStackTrace();
+//            return false;
+//        }
+        try{
+            Process process = run.exec("cmd /c " + cmd);
+//            BufferedReader br = new BufferedReader(new InputStreamReader(process.getInputStream(), "UTF-8"));
+//            String line = null;
+//            StringBuilder build = new StringBuilder();
+//            while ((line = br.readLine()) != null) {
+//                System.out.println(line);
+//                build.append(line);
+//            }
+        } catch (IOException e){
             e.printStackTrace();
             return false;
         }
+
 
         //map.put("url", host + port + "/");
         map.put("dir", dir);

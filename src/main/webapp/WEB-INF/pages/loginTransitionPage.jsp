@@ -47,31 +47,51 @@
     }
 
     $(document).ready(function () {
-        // var percent = 0;
-        // for(var i = 0; i<10; i++){
-        //     percent = percent + 10;
-        //     sleep(500);
-        //     $(".progress-bar").css("width", percent + "%");
-        // }
         setTimeout("step1()", 500);
-        setTimeout("step2()", 500);
-        setTimeout("step3()", 500);
-        setTimeout("step4()", 500);
-
-        window.location.href = "experiment";
     });
     
     function step1() {
-        $(".progress-bar").css("width", "25%");
+        $(".progress-bar").css("width", "10%");
+        setTimeout("step2()", 500);
     }
     function step2() {
-        $(".progress-bar").css("width", "50%");
+        $(".progress-bar").css("width", "20%");
+        setTimeout("step3()", 500);
     }
     function step3() {
-        $(".progress-bar").css("width", "75%");
+        $(".progress-bar").css("width", "30%");
+        setTimeout("step4()", 500);
     }
     function step4() {
+        $(".progress-bar").css("width", "40%");
+        setTimeout("step5()", 500);
+    }
+    function step5() {
+        $(".progress-bar").css("width", "50%");
+        setTimeout("step6()", 500);
+    }
+    function step6() {
+        $(".progress-bar").css("width", "60%");
+        setTimeout("step7()", 500);
+    }
+    function step7() {
+        $(".progress-bar").css("width", "70%");
+        setTimeout("step8()", 500);
+    }
+    function step8() {
+        $(".progress-bar").css("width", "80%");
+        setTimeout("step9()", 500);
+    }
+    function step9() {
+        $(".progress-bar").css("width", "90%");
+        setTimeout("step10()", 500);
+    }
+    function step10() {
         $(".progress-bar").css("width", "100%");
+        setTimeout("jump()", 1000);
+    }
+    function jump() {
+        window.location.href = "experiment";
     }
 </script>
 
