@@ -29,7 +29,7 @@
 <div class="container" id="pageContain">
     <div class="row">
         <%--左侧文件管理区--%>
-        <div class="col-lg-2 area">
+        <div class="col-lg-2 area" id="left">
             <div class="input-group" id="searchDiv">
                 <input type="text" class="form-control" placeholder="搜索所有文件" aria-describedby="basic-addon2">
             </div>
@@ -48,13 +48,13 @@
         </div>
 
         <%--中间Jupyter编辑区--%>
-        <div class="col-xs-8 area">
+        <div class="col-xs-8 area" id="center">
             <iframe src=" " id="my-iframe">
             </iframe>
         </div>
 
         <%--右侧实验指导+工具栏区--%>
-        <div class="col-xs-2 area">
+        <div class="col-xs-2 area" id="right">
 
             <div id="toolDiv">
                 <label>工具栏</label>
@@ -71,20 +71,23 @@
                         <a href="#">延时</a>
                     </li>
                     <li role="presentation">
-                        <a href="#" id="save-notebook">保存实验</a>
+                        <a href="javascript:void(0)" id="save-notebook">保存实验</a>
                     </li>
 
                     <li role="presentation">
                         <a href="#">重置实验</a>
                     </li>
                     <li role="presentation">
-                        <a href="#">导出实验</a>
+                        <a href="javascript:void(0)" id="export-notebook">导出实验</a>
                     </li>
                     <li role="presentation">
                         <a href="#">提交实验</a>
                     </li>
                     <li role="presentation">
-                        <a href="#">退出实验</a>
+                        <a href="javascript:void(0)" id="start-kernel">启动实验</a>
+                    </li>
+                    <li role="presentation">
+                        <a href="javascript:void(0)" id="shutdown-kernel">退出实验</a>
                     </li>
                 </ul>
             </div>
@@ -94,16 +97,70 @@
             </div>
 
             <div id="expGuideDiv">
-                <div class="list-group">
-                    <button type="button" class="list-group-item active">实验步骤1</button>
-                    <button type="button" class="list-group-item">实验步骤2</button>
-                    <button type="button" class="list-group-item">实验步骤3</button>
-                    <button type="button" class="list-group-item">实验步骤4</button>
-                    <button type="button" class="list-group-item">实验步骤5</button>
+                <div id="step-menu"></div>
+            </div>
+
+            <div id="videoAndTestDiv">
+                <div id="videoDiv" style="margin-top: 30px">
+                    <video src="#" controls="controls" style="width: 98%;">
+                        您的浏览器不支持 video 标签
+                    </video>
+                </div>
+
+                <div id="submitDiv">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#testingModal">
+                        实验完成 开始测试
+                    </button>
                 </div>
             </div>
+
         </div>
     </div>
+</div>
+
+<%--点击完成实验 开始测试按钮的弹出框--%>
+<div class="modal fade" id="testingModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span
+                        class="sr-only">Close</span></button>
+                <h4 class="modal-title">测试题 | 实验名称</h4>
+            </div>
+
+            <div class="progress" style="width: 80%;margin: 0 auto;margin-top: 10px;">
+                <div class="progress-bar" style="width: 20%;">
+                </div>
+            </div>
+
+            <div class="modal-body" style="text-align: center">
+                <p>题目内容</p>
+                <div class="row">
+                    <div class="col-lg-2">上一题</div>
+                    <div class="col-lg-8">
+                        <form role="form" style="text-align: left;">
+                            <div class="checkbox">
+                                <label><input type="checkbox" value="">选项A</label>
+                            </div>
+                            <div class="checkbox">
+                                <label><input type="checkbox" value="">选项B</label>
+                            </div>
+                            <div class="checkbox">
+                                <label><input type="checkbox" value="">选项C</label>
+                            </div>
+                            <div class="checkbox">
+                                <label><input type="checkbox" value="">选项D</label>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-lg-2">下一题</div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" type="button" style="display: none">提交</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
 </div>
 
 
@@ -142,9 +199,10 @@
                 var lastHtml =
                     "<div class=\"folder\">" +
                     "<span class=\"glyphicon glyphicon-folder-close\"></span>" +
-                    "<button type=\"button\" class='btn btn-link folderName' href=" + temp + ">" + "返回上一级..." + "</button>" +
+                    "<button type=\"button\" id=\"lastFolder\" class='btn btn-link folderName' href=" + temp + ">" + "</button>" +
                     "</div>";
                 $("#folderDiv").append(lastHtml);
+                $("#lastFolder").text("返回上一级...");
 
                 for (var i = 0; i < files.length; i++) {
                     if (files[i].type == "directory") {
@@ -195,8 +253,8 @@
                         var folderHref = basePath + fileApi + files[i].path;
                         var html =
                             "<div class=\"folder\">" +
-                                "<span class=\"glyphicon glyphicon-folder-close\"></span>" +
-                                "<button type=\"button\" class='btn btn-link folderName' href=" + folderHref + ">" + files[i].name + "</btn>" +
+                            "<span class=\"glyphicon glyphicon-folder-close\"></span>" +
+                            "<button type=\"button\" class='btn btn-link folderName' href=" + folderHref + ">" + files[i].name + "</btn>" +
                             "</div>";
                         $("#folderDiv").append(html);
                     } else {
@@ -212,6 +270,59 @@
             }
         );
     });
+</script>
+
+<script type="text/javascript">
+    var frameID = 'my-iframe';
+    // Add click event that can post massage to iframe.
+    var actions_list = ["save-notebook", "shutdown-kernel", "export-notebook", "start-kernel"];
+    $(function (argument) {
+        for (var i = 0; i < actions_list.length; i++) {
+            var n_action = actions_list[i];
+            $("#" + n_action).click(function () {
+                this_id = $(this).attr("id")
+                var notebook = document.getElementById(frameID);
+                var data = {"actions": this_id, "msg": ""};
+                // if(data.actions == "scroll-heading") {
+                //     data.msg = $('#scroll-heading').text();
+                // } else {
+                //     data.msg = "";
+                // }
+                console.log(data);
+                notebook.contentWindow.postMessage(data, "*");
+            });
+        }
+    });
+    // Generate Table of Content in jupyter notebook
+    window.addEventListener('message', function (event) {
+        // Will print message continuously ???
+        // if(event.origin !== 'http://192.168.3.80') return;
+        act = event.data.actions;
+        msg = event.data.msg;
+        // For test
+        console.log("The response is: " + act + " " + msg);
+        // Switch to the event
+        if (act == 'notebook-toc') {
+            var menu_obj = $('#step-menu');
+            // replace html
+            menu_obj.html(msg);
+        } else if (act == 'notebook-toc-evt') {
+            // add click events for link ?????
+            var links = $('#step-menu a');
+            for (var i = 0; i < links.length; i++) {
+                // console.log($(links[i]).text());
+                $(links[i]).click(function () {
+                    var notebook = document.getElementById(frameID);
+                    var data = {"actions": "scroll-heading", "msg": $(this).text()};
+                    console.log(data)
+                    notebook.contentWindow.postMessage(data, "*");
+                });
+            }
+        }
+        else {
+            console.log("Unrecognized command!");
+        }
+    }, false);
 </script>
 
 </body>

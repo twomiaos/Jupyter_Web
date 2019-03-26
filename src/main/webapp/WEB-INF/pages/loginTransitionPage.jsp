@@ -76,15 +76,15 @@
     }
     function step7() {
         $(".progress-bar").css("width", "70%");
-        setTimeout("step8()", 500);
+        setTimeout("step8()", 1000);
     }
     function step8() {
         $(".progress-bar").css("width", "80%");
-        setTimeout("step9()", 500);
+        setTimeout("step9()", 1000);
     }
     function step9() {
         $(".progress-bar").css("width", "90%");
-        setTimeout("step10()", 500);
+        setTimeout("step10()", 1000);
     }
     function step10() {
         $(".progress-bar").css("width", "100%");
