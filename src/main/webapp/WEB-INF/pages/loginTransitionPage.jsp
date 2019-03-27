@@ -41,10 +41,6 @@
 </div>
 
 <script>
-    function sleep(n) {
-        var start = new Date().getTime();
-        while (true) if (new Date().getTime() - start > n) break;
-    }
 
     $(document).ready(function () {
         setTimeout("step1()", 500);

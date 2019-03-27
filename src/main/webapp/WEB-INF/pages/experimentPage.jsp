@@ -39,7 +39,7 @@
             </div>
 
             <div id="folderDiv">
-
+                服务器未响应，请尝试<a href="javascript:void(0)" onclick="refresh()">刷新</a>
             </div>
             <div id="fileDiv">
 
@@ -173,6 +173,31 @@
         return false;
     });
 
+    // 文档加载后，发送Ajax请求文件列表
+    $(document).ready(function () {
+        var basePath = "${sessionScope.basepath}";
+        var notebookDir = "notebooks/";
+        var username = "${sessionScope.username}";
+        var fileApi = "api/contents/";
+        var page = fileApi + username;
+        var type = "directory";
+        var token = "${sessionScope.token}";
+
+        getFileListFromJson(basePath, fileApi, type, token, notebookDir);
+    });
+
+    function refresh(){
+        var basePath = "${sessionScope.basepath}";
+        var notebookDir = "notebooks/";
+        var username = "${sessionScope.username}";
+        var fileApi = "api/contents/";
+        var page = fileApi + username;
+        var type = "directory";
+        var token = "${sessionScope.token}";
+
+        getFileListFromJson(basePath, fileApi, type, token, notebookDir);
+    }
+
     // 点击文件夹链接，发送Ajax请求
     $('body').on('click', '.folderName', function () {
         var basePath = "${sessionScope.basepath}";
@@ -183,10 +208,12 @@
         var token = "${sessionScope.token}";
         var page = $(this).attr('href');
 
-        $.get(
-            page,
-            {"type": type, "token": token},
-            function (result) {
+        $.ajax({
+            type: "get",
+            url: page,
+            data: {"type": type, "token": token},
+            cache: false,
+            success: function (result) {
                 var json = eval(result);
                 var files = json.content;
 
@@ -224,23 +251,17 @@
 
                 }
             }
-        );
+        });
     });
 
-    // 文档加载后，发送Ajax请求文件列表
-    $(document).ready(function () {
-        var basePath = "${sessionScope.basepath}";
-        var notebookDir = "notebooks/";
-        var username = "${sessionScope.username}";
-        var fileApi = "api/contents/";
-        var page = fileApi + username;
-        var type = "directory";
-        var token = "${sessionScope.token}";
-
-        $.get(
-            basePath + fileApi,
-            {"type": type, "token": token},
-            function (result) {
+    // 获取文件根目录
+    function getFileListFromJson(basePath, fileApi, type, token, notebookDir) {
+        $.ajax({
+            type: "get",
+            url:basePath + fileApi,
+            data: {"type": type, "token": token},
+            cache: false,
+            success:function (result) {
                 var json = eval(result);
                 var files = json.content;
 
@@ -267,9 +288,14 @@
                     }
 
                 }
+            },
+            error: function (xhr,state,errorThrown) {
+                var html = "服务器未响应！请尝试<a href=javascript:void(0) onclick= refresh()>刷新</a>";
+                $("#folderDiv").empty();
+                $("#folderDiv").append(html);
             }
-        );
-    });
+        });
+    }
 </script>
 
 <script type="text/javascript">
