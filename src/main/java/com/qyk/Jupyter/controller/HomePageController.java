@@ -21,7 +21,7 @@ public class HomePageController {
     @RequestMapping("/loginCheck")
     public String login(HttpSession session, String name, String password, Map<String, Object> map){
         if(userService.loginCheck(name, password)){
-            if(userService.runJupyter(name, map)){
+            if(userService.runRemoteJupyter(name, map)){
                 session.setAttribute("token", map.get("token"));
                 session.setAttribute("port", map.get("port"));
                 session.setAttribute("username", name);

@@ -11,14 +11,14 @@
 
 <div id = topbar>
     <div class="container">
-        <ol class="nav nav-pills left">
+        <ol class="nav nav-pill left">
             <li><a href="#">大数据综合实训平台</a></li>
         </ol>
-        <ol class="nav nav-pills right">
+        <ol class="nav nav-pill right">
             <li><a href="#">实训中心</a></li>
             <li><a href="#">帮助中心</a></li>
-            <li><a href="#">拓展学习</a></li>
-            <li><a href="#">答疑平台</a></li>
+            <li><a href="http://www.peixun.net/">拓展学习</a></li>
+            <li><a href="http://www.pinggu.com/">答疑平台</a></li>
             <c:if test="${!empty sessionScope.username}">
                 <li><a href="#">${sessionScope.username}</a></li>
             </c:if>

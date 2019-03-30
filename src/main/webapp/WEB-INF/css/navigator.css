@@ -22,3 +22,7 @@
     color: #ffffff;
     font-size: 15px;
 }
+
+.nav > li {
+    display: inline-block;
+}
