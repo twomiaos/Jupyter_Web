@@ -1,17 +1,13 @@
 package com.qyk.Jupyter.service.impl;
 
 import ch.ethz.ssh2.Connection;
-import ch.ethz.ssh2.Session;
-import ch.ethz.ssh2.StreamGobbler;
 import com.qyk.Jupyter.service.UserService;
 import com.qyk.Jupyter.utils.ConfigurationFactory;
-import com.qyk.Jupyter.utils.RemoteConnect;
 import com.qyk.Jupyter.utils.RunRemoteCommand;
-import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 
-import java.io.*;
+import java.io.IOException;
 import java.util.Map;
 import java.util.Random;
 
@@ -95,7 +91,7 @@ public class UserServiceImpl implements UserService {
                 + token + " --NotebookApp.notebook_dir=" + dir + " --allow-root &";
         try {
             // 执行命令
-            RunRemoteCommand.execute(remoteIp, username, password, cmd);
+            RunRemoteCommand.execute(remoteIp, username, password, cmd, false);
         } catch (Exception e) {
             e.printStackTrace();
             return false;

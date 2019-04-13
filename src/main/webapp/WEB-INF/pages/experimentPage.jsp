@@ -12,7 +12,7 @@
 %>
 <html>
 <head>
-    <%--<base href="<%=basePath%>">--%>
+    <base href="<%=basePath%>">
     <script src="js/jquery/2.0.0/jquery.min.js"></script>
     <link href="css/bootstrap/3.3.6/bootstrap.css" rel="stylesheet"/>
     <link href="css/navigator.css" rel="stylesheet">
