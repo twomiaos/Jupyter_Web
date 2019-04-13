@@ -6,6 +6,7 @@ import ch.ethz.ssh2.StreamGobbler;
 import com.qyk.Jupyter.service.UserService;
 import com.qyk.Jupyter.utils.ConfigurationFactory;
 import com.qyk.Jupyter.utils.RemoteConnect;
+import com.qyk.Jupyter.utils.RunRemoteCommand;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
@@ -92,11 +93,9 @@ public class UserServiceImpl implements UserService {
 
         String cmd = "LANG=zh_CN nohup jupyter notebook --port=" + port + " --NotebookApp.token="
                 + token + " --NotebookApp.notebook_dir=" + dir + " --allow-root &";
-
-        System.out.println(cmd);
-
         try {
-            this.connectLinux(remoteIp, username, password, cmd);
+            // 执行命令
+            RunRemoteCommand.execute(remoteIp, username, password, cmd);
         } catch (Exception e) {
             e.printStackTrace();
             return false;
@@ -123,138 +122,6 @@ public class UserServiceImpl implements UserService {
         }
 
         return new String(initToken);
-    }
-
-    /**
-     *
-     * @Title: ConnectLinux
-     * @Description: 通过用户名和密码关联linux服务器
-     * @return
-     * @return String
-     * @throws
-     */
-    private boolean connectLinux(String ip,String userName,String password,String commandStr) {
-
-        logger.info("ConnectLinuxCommand  scpGet===" + "ip:" + ip + "  userName:" + userName + "  commandStr:"
-                + commandStr);
-
-        String returnStr = "";
-        boolean result = true;
-
-        RemoteConnect remoteConnect = new RemoteConnect();
-        remoteConnect.setIp(ip);
-        remoteConnect.setUserName(userName);
-        remoteConnect.setPassword(password);
-        try {
-            if (login(remoteConnect)) {
-                returnStr = execute(commandStr);
-                System.out.println(returnStr);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        if (StringUtils.isBlank(returnStr)) {
-            result = false;
-        }
-        return result;
-    }
-
-    /**
-     *
-     * @Title: login
-     * @Description: 用户名密码方式  远程登录linux服务器
-     * @return: Boolean
-     * @throws
-     */
-    private Boolean login(RemoteConnect remoteConnect) {
-        boolean flag = false;
-        try {
-            conn = new Connection(remoteConnect.getIp());
-            conn.connect();// 连接
-            flag = conn.authenticateWithPassword(remoteConnect.getUserName(), remoteConnect.getPassword());// 认证
-            if (flag) {
-                logger.info("认证成功！");
-            } else {
-                logger.info("认证失败！");
-                conn.close();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return flag;
-    }
-
-    /**
-     *
-     * @Title: execute
-     * @Description: 远程执行shll脚本或者命令
-     * @param cmd 脚本命令
-     * @return: result 命令执行完毕返回结果
-     * @throws
-     */
-    private String execute(String cmd){
-        String result = "";
-        try {
-            Session session = conn.openSession();// 打开一个会话
-            session.execCommand(cmd);// 执行命令
-            // 防止被阻塞
-            // result = processStdout(session.getStdout(), DEFAULTCHARTSET);
-            // 如果为得到标准输出为空，说明脚本执行出错了
-//            if (StringUtils.isBlank(result)) {
-//                result = processStdout(session.getStderr(), DEFAULTCHARTSET);
-//            }
-            conn.close();
-            session.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return result;
-    }
-    /**
-     * @Title: executeSuccess
-     * @Description: 远程执行shell脚本或者命令
-     * @param: cmd 脚本或者命令
-     * @return String 命令执行成功后返回的结果值，如果命令执行失败，返回空字符串，不是null
-     * @throws
-     */
-    private String executeSuccess(String cmd){
-        String result = "";
-        try {
-            Session session = conn.openSession();// 打开一个会话
-            session.execCommand(cmd);// 执行命令
-            result = processStdout(session.getStdout(), DEFAULTCHARTSET);
-            conn.close();
-            session.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return result;
-    }
-    /**
-     *
-     * @Title: processStdout
-     * @Description: 解析脚本执行的返回结果
-     * @param in 输入流对象
-     * @param charset 编码
-     * @return String 以纯文本的格式返回
-     * @throws
-     */
-    private String processStdout(InputStream in, String charset){
-        InputStream stdout = new StreamGobbler(in);
-        StringBuffer buffer = new StringBuffer();
-        try {
-            BufferedReader br = new BufferedReader(new InputStreamReader(stdout, charset));
-            String line = null;
-            while ((line = br.readLine()) != null) {
-                buffer.append(line + "\n");
-            }
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return buffer.toString();
     }
 }
 

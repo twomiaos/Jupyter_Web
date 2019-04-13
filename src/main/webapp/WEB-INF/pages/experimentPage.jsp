@@ -18,6 +18,7 @@
     <link href="css/navigator.css" rel="stylesheet">
     <link href="css/experimentPage.css" rel="stylesheet">
     <script src="js/bootstrap/3.3.6/bootstrap.js"></script>
+    <script src="js/experiment.js"></script>
 
 
     <title>实训中心</title>

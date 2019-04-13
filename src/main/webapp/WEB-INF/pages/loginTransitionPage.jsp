@@ -72,11 +72,11 @@
     }
     function step7() {
         $(".progress-bar").css("width", "70%");
-        setTimeout("step8()", 1000);
+        setTimeout("step8()", 500);
     }
     function step8() {
         $(".progress-bar").css("width", "80%");
-        setTimeout("step9()", 1000);
+        setTimeout("step9()", 500);
     }
     function step9() {
         $(".progress-bar").css("width", "90%");
@@ -84,7 +84,7 @@
     }
     function step10() {
         $(".progress-bar").css("width", "100%");
-        setTimeout("jump()", 1000);
+        setTimeout("jump()", 500);
     }
     function jump() {
         window.location.href = "experiment";
