@@ -14,4 +14,4 @@ function keeplive(){
 // 设置定时刷新(每两秒执行一次)
 ref = setInterval(function(){
     keeplive();
-}, 2000);
+}, 20000);

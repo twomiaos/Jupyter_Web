@@ -101,6 +101,7 @@ public class UserServiceImpl implements UserService {
         map.put("dir", dir);
         map.put("token", token);
         map.put("basepath", host + port + "/");
+        map.put("port", port);
 
         return true;
     }
