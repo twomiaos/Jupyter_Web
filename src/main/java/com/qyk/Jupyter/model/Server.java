@@ -8,10 +8,19 @@ import java.util.Date;
  * 正在运行的jupyter服务器实例
  */
 public class Server {
+    private Integer uid;
     private Integer port;
     private String token;
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date createTime;
+
+    public Integer getUid() {
+        return uid;
+    }
+
+    public void setUid(Integer uid) {
+        this.uid = uid;
+    }
 
     public Integer getPort() {
         return port;
@@ -40,7 +49,8 @@ public class Server {
     @Override
     public String toString() {
         return "Server{" +
-                "port=" + port +
+                "uid=" + uid +
+                ", port=" + port +
                 ", token='" + token + '\'' +
                 ", createTime=" + createTime +
                 '}';

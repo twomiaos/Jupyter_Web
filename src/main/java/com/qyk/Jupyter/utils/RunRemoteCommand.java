@@ -78,6 +78,7 @@ public class RunRemoteCommand {
             session.close();
         } catch (Exception e) {
             e.printStackTrace();
+            logger.info("远程命令执行失败!");
             return "false";
         }
 

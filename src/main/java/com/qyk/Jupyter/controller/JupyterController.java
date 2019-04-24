@@ -1,6 +1,7 @@
 package com.qyk.Jupyter.controller;
 
 import com.qyk.Jupyter.service.JupyterService;
+import com.qyk.Jupyter.utils.JwtUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import java.util.Map;
 
 @Controller
 @RequestMapping(value = "jupyter")
@@ -18,6 +20,39 @@ public class JupyterController {
 
     private static final Logger logger = Logger.getLogger(JupyterController.class);
 
+    /**
+     * 进入jupyter设计器
+     * @param id jupyter文件 id
+     * @param token 用户认证的JWT-token(可能放在请求头中？)
+     * @return jupyter编辑器页面
+     */
+    @RequestMapping(value = "")
+    public String openJupyter(Integer id, String token){
+        Map<String, Object> userInfo;
+
+        // 从远端获取文件信息(name/url/type/orig_id)
+        Map<String, Object> fileInfo = jupyterService.getFileInfo(id);
+
+        // 解密用户信息
+        try {
+            userInfo = JwtUtils.verifyToken(token);
+        } catch (Exception e) {
+            logger.info("用户鉴权失败...\ntoken=" + token);
+            // 返回错误页面
+            return " ";
+        }
+
+
+
+        return "";
+    }
+
+
+
+
+
+
+    /* ------------以下为Demo版本使用的-------------- */
     // 心跳机制，检测前端jupyter页面是否正常/异常关闭
     @RequestMapping(value = "keeplive")
     @ResponseBody
@@ -37,18 +72,6 @@ public class JupyterController {
 
         return "hello!";
     }
+    /* ------------以下为Demo版本使用的-------------- */
 
-    // 新建一个实验
-    @RequestMapping(value = "addExperiment")
-    public String addExperiment(String token, Integer id){
-
-        return "";
-    }
-
-    // 新建一个作业
-    @RequestMapping(value = "addWork")
-    public String addWork(String token, Integer id){
-
-        return "";
-    }
 }

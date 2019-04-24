@@ -8,6 +8,10 @@
         SELECT * FROM tb_running_server
     </select>
     
+    <select id="getBuUid" resultType="com.qyk.Jupyter.model.Server">
+        SELECT * FROM tb_running_server WHERE uid = #{uid}
+    </select>
+    
     <select id="getByPort" resultType="com.qyk.Jupyter.model.Server">
         SELECT * FROM tb_running_server WHERE port = #{port}
     </select>
@@ -15,12 +19,16 @@
     <delete id="deleteByPort">
         DELETE FROM tb_running_server WHERE port = #{port}
     </delete>
+    
+    <delete id="deleteByUid">
+        DELETE FROM tb_running_server WHERE uid = #{uid}
+    </delete>
 
     <delete id="deleteByToken">
         DELETE FROM tb_running_server WHERE token = #{token}
     </delete>
     
     <insert id="insert">
-        INSERT INTO tb_running_server(port, token, create_time) VALUE(#{port}, #{token}, #{createTime})
+        INSERT INTO tb_running_server(uid, port, token, create_time) VALUE(#{uid}, #{port}, #{token}, #{createTime})
     </insert>
 </mapper>

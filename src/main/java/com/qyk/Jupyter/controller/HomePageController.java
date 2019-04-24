@@ -18,6 +18,7 @@ public class HomePageController {
         return "loginPage";
     }
 
+    /* ------------以下为Demo版本使用的------------ */
     @RequestMapping("/loginCheck")
     public String login(HttpSession session, String name, String password, Map<String, Object> map){
         if(userService.loginCheck(name, password)){
@@ -40,4 +41,5 @@ public class HomePageController {
         // 测试用！根据不同的实验id号返回对应的实验页面
         return "experimentPage";
     }
+    /* ------------以上为Demo版本使用的------------ */
 }

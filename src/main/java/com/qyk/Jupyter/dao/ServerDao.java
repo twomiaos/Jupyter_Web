@@ -12,6 +12,13 @@ public interface ServerDao {
     List<Server> getAll();
 
     /**
+     * 获取指定用户的jupyter服务器信息
+     * @param uid 用户id
+     * @return jupyter服务器信息
+     */
+    Server getByUid(Integer uid);
+
+    /**
      * 获取指定端口的服务器信息
      * @param port jupyter服务器运行的端口号（8888~18888）
      * @return 服务器信息
@@ -29,6 +36,8 @@ public interface ServerDao {
      * @param token jupyter服务器与用户交互的唯一标识(长度为46的字符串)
      */
     void deleteByToken(String token);
+
+    void deleteByUid(Integer uid);
 
     /**
      * 新增一条真在运行的jupyter服务器信息
