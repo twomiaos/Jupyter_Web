@@ -36,7 +36,7 @@
     </div>
 </div>
 
-<div style="text-align: center;margin-top: 20px;color: #898888">
+<div style="text-align: center;margin-top: 20px;color: #898888" id="note">
     正在启动实验, 请稍等...
 </div>
 
@@ -65,6 +65,7 @@
     function step5() {
         $(".progress-bar").css("width", "50%");
         setTimeout("step6()", 500);
+        $("#note").text("正在装载实验数据...")
     }
     function step6() {
         $(".progress-bar").css("width", "60%");

@@ -51,6 +51,7 @@
         <%--中间Jupyter编辑区--%>
         <div class="col-xs-8 area" id="center">
             <iframe src=" " id="my-iframe">
+                <p>第一次打开jupyter文件可能需要等待较长时间</p>
             </iframe>
         </div>
 
@@ -66,17 +67,17 @@
                 </button>
                 <ul class="dropdown-menu" role="menu">
                     <li>
-                        <a href="#">60:00</a>
+                        <a href="javascript:void(0)">60:00</a>
                     </li>
                     <li>
-                        <a href="#">延时</a>
+                        <a href="javascript:void(0)">延时</a>
                     </li>
                     <li role="presentation">
                         <a href="javascript:void(0)" id="save-notebook">保存实验</a>
                     </li>
 
                     <li role="presentation">
-                        <a href="#">重置实验</a>
+                        <a href="javascript:void(0)">重置实验</a>
                     </li>
                     <li role="presentation">
                         <a href="javascript:void(0)" id="export-notebook">导出实验</a>
@@ -166,10 +167,17 @@
 
 
 <script>
+    var flag = 0;
+
     // 点击文件链接，替换iframe标签的src
     $('body').on('click', '.fileName', function () {
         var src = $(this).attr("href") + "?token=" + "${sessionScope.token}";
         // alert(src);
+        if(flag == 0){
+            alert("第一次打开jupyter文件可能需要较长时间，请等待！")
+            flag = 1;
+        }
+
         $("#my-iframe").attr("src", src);
         return false;
     });
@@ -265,6 +273,8 @@
             success:function (result) {
                 var json = eval(result);
                 var files = json.content;
+                // 测试用
+                // var flag = 0;
 
                 // 清空div中的内容
                 $("#fileDiv").empty();
@@ -286,6 +296,12 @@
                             "<a class='fileName' href=" + fileHref + ">" + files[i].name + "</a>" +
                             "</div>";
                         $("#fileDiv").append(html);
+
+                        <%--// 测试用--%>
+                        <%--if(flag==0){--%>
+                            <%--$("#my-iframe").attr("src", fileHref + "?token=" + "${sessionScope.token}");--%>
+                            <%--flag = 1;--%>
+                        <%--}--%>
                     }
 
                 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
     <!--Spring配置文件-->
@@ -12,7 +12,55 @@
     </context:component-scan>
 
     <!--2.配置数据源-->
+    <context:property-placeholder location="classpath:database.properties"/>
+    <bean id="dataSource"
+          class="org.apache.commons.dbcp.BasicDataSource"
+          destroy-method="close"
+          lazy-init="false"
+          p:driverClassName="${dataSource.driverClassName}"
+          p:url="${dataSource.url}"
+          p:username="${dataSource.username}"
+          p:password="${dataSource.password}"
+          p:maxActive="${dataSource.maxActive}"
+          p:maxIdle="${dataSource.maxIdle}"
+          p:maxWait="${dataSource.maxWait}"
+          p:validationQuery="${dataSource.validationQuery}"
+          p:testOnBorrow="${dataSource.testOnBorrow}"
+    />
 
     <!--3.配置Mybatis-->
+    <!--    3.1 配置SqlSessionFactory bean, 设置数据源信息和mapper文件位置(待配置分页插件)-->
+    <bean id="sqlSessionFactoryBean"
+          class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!--配置数据源-->
+        <property name="dataSource" ref="dataSource"/>
+        <!--配置MyBatis全局配置文件-->
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
+        <!--配置用于SQL语句映射的mapper文件-->
+        <property name="mapperLocations" value="classpath:mapper/*.xml"/>
+        <!--配置拦截器插件-->
+        <property name="plugins">
+            <array>
+                <!--配置分页插件-->
+                <!--<bean class="com.github.pagehelper.PageInterceptor">-->
+                    <!--<property name="properties">-->
+                        <!--<value>-->
 
+                        <!--</value>-->
+                    <!--</property>-->
+                <!--</bean>-->
+            </array>
+        </property>
+    </bean>
+    <!--    3.2 MyBatis的DAO接口扫描-->
+    <bean id="mapperScannerConfigurer"
+          class="org.mybatis.spring.mapper.MapperScannerConfigurer"
+          p:basePackage="com.qyk.Jupyter.dao"
+    />
+
+    <!--    3.3 配置Spring的事务管理器, 配置需要Spring管理的数据源-->
+    <bean class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
+          id="transactionManager"
+          p:dataSource-ref="dataSource"
+    />
 </beans>
