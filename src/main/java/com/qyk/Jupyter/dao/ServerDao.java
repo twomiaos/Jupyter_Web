@@ -40,7 +40,7 @@ public interface ServerDao {
     void deleteByUid(Integer uid);
 
     /**
-     * 新增一条真在运行的jupyter服务器信息
+     * 新增一条正在运行的jupyter服务器信息
      * @param server jupyter服务器(所有字段必须为非空)
      */
     void insert(Server server);

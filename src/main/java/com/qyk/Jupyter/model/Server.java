@@ -13,6 +13,7 @@ public class Server {
     private String token;
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date createTime;
+    private String jwtToken;
 
     public Integer getUid() {
         return uid;
@@ -46,6 +47,14 @@ public class Server {
         this.createTime = createTime;
     }
 
+    public String getJwtToken() {
+        return jwtToken;
+    }
+
+    public void setJwtToken(String jwtToken) {
+        this.jwtToken = jwtToken;
+    }
+
     @Override
     public String toString() {
         return "Server{" +
@@ -53,6 +62,7 @@ public class Server {
                 ", port=" + port +
                 ", token='" + token + '\'' +
                 ", createTime=" + createTime +
+                ", jwtToken='" + jwtToken + '\'' +
                 '}';
     }
 }

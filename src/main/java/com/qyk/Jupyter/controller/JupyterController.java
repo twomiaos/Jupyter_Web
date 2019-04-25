@@ -37,11 +37,10 @@ public class JupyterController {
         try {
             userInfo = JwtUtils.verifyToken(token);
         } catch (Exception e) {
-            logger.info("用户鉴权失败...\ntoken=" + token);
+            logger.info("用户鉴权失败... token=" + token);
             // 返回错误页面
             return " ";
         }
-
 
 
         return "";

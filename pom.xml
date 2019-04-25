@@ -44,6 +44,23 @@
       <!--<version>1.1.2</version>-->
     <!--</dependency>-->
 
+    <!--Spring和Spring MVC-->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-web</artifactId>
+      <version>4.1.8.RELEASE</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-webmvc</artifactId>
+      <version>4.1.8.RELEASE</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-jdbc</artifactId>
+      <version>4.1.8.RELEASE</version>
+    </dependency>
+
     <!--MySQL驱动-->
     <dependency>
       <groupId>mysql</groupId>
@@ -64,7 +81,6 @@
       <artifactId>commons-dbcp</artifactId>
       <version>1.4</version>
     </dependency>
-
 
     <!--Mybatis-->
     <dependency>
@@ -93,86 +109,6 @@
       <groupId>com.github.pagehelper</groupId>
       <artifactId>pagehelper</artifactId>
       <version>5.1.6</version>
-    </dependency>
-
-
-    <!--Spring和Spring MVC-->
-    <!--Spring核心模块(IOC容器)-->
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-beans</artifactId>
-      <version>4.1.8.RELEASE</version>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-context</artifactId>
-      <version>4.1.8.RELEASE</version>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-core</artifactId>
-      <version>4.1.8.RELEASE</version>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-expression</artifactId>
-      <version>4.1.8.RELEASE</version>
-    </dependency>
-
-    <!--Spring AOP模块(面向切面编程)-->
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-aop</artifactId>
-      <version>4.1.8.RELEASE</version>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-aspects</artifactId>
-      <version>4.1.8.RELEASE</version>
-    </dependency>
-    <dependency>
-      <groupId>net.sourceforge.cglib</groupId>
-      <artifactId>com.springsource.net.sf.cglib</artifactId>
-      <version>2.2.0</version>
-    </dependency>
-    <dependency>
-      <groupId>org.aopalliance</groupId>
-      <artifactId>com.springsource.org.aopalliance</artifactId>
-      <version>1.0.0</version>
-    </dependency>
-    <dependency>
-      <groupId>org.aspectj</groupId>
-      <artifactId>com.springsource.org.aspectj.weaver</artifactId>
-      <version>1.6.4.RELEASE</version>
-    </dependency>
-
-    <!--Spring和数据库的JDBC模块-->
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-jdbc</artifactId>
-      <version>4.1.8.RELEASE</version>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-orm</artifactId>
-      <version>4.1.8.RELEASE</version>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-tx</artifactId>
-      <version>4.1.8.RELEASE</version>
-    </dependency>
-
-    <!--SpringMVC模块-->
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-web</artifactId>
-      <version>4.1.8.RELEASE</version>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-webmvc</artifactId>
-      <version>4.1.8.RELEASE</version>
     </dependency>
 
     <!--Spring运行依赖的日志包-->
@@ -225,6 +161,12 @@
       <groupId>com.auth0</groupId>
       <artifactId>java-jwt</artifactId>
       <version>3.1.0</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>fastjson</artifactId>
+      <version>1.2.30</version>
     </dependency>
 
   </dependencies>

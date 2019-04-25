@@ -5,13 +5,13 @@ import com.qyk.Jupyter.service.UserService;
 import com.qyk.Jupyter.utils.ConfigurationFactory;
 import com.qyk.Jupyter.utils.RunRemoteCommand;
 import org.apache.log4j.Logger;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.Map;
 import java.util.Random;
 
-@Repository("userService")
+@Service("userService")
 public class UserServiceImpl implements UserService {
     private static final Logger logger = Logger.getLogger(UserServiceImpl.class);
     private static String DEFAULTCHARTSET = "UTF-8";

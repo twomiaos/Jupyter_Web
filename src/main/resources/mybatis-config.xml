@@ -51,7 +51,7 @@
     <!--&lt;!&ndash;5.sql映射资源&ndash;&gt;-->
     <!--<mappers>-->
         <!--&lt;!&ndash;SQL语句映射文件&ndash;&gt;-->
-        <!--<mapper resource="mapper/serverMapper.xml"/>-->
+        <!--<mapper resource="mapper/serverDao.xml"/>-->
     <!--</mappers>-->
     <!--以上配置内容作为单元测试用，正式运行项目时需要注释掉-->
     <!--以上配置内容作为单元测试用，正式运行项目时需要注释掉-->

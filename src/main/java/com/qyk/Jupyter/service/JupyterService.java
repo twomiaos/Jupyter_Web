@@ -12,10 +12,10 @@ public interface JupyterService {
 
     /**
      * 为用户开启 jupyter 服务器实例
-     * @param userInfo 用户信息(uid, roles, name)
+     * @param jwtToken 包含用户信息(uid, roles, name)
      * @return 服务器实例是否启用成功(如果之前已经为该用户启用，则直接返回 true)
      */
-    public boolean startJupyterServer(Map<String, Object> userInfo);
+    public boolean startJupyterServer(String jwtToken) throws Exception;
 
     /* ------------以下为Demo版本使用的-------------- */
     void keeplive(String port);
